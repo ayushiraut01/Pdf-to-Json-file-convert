@@ -1,0 +1,8 @@
+pdfplumber
+pytesseract
+pandas
+spacy
+transformers
+pdfminer.six
+pymupdf
+openai
