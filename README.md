@@ -1,10 +1,5 @@
 # Pdf-to-Json-file-convert
 
-Here’s an expanded version of your flowchart, with additional details on each step:
-
-Expanded Flowchart:
-Start
-
 Initialization of the process.
 System prepares for PDF processing.
 Load PDF Files
