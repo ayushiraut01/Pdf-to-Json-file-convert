@@ -5,14 +5,14 @@ import fitz
 from utils.pdf_parser import parse_pdf
 
 # Configure OpenAI API
-openai.api_key = ""
+openai.api_key = "  "
 def extract_text_from_pdf(pdf_path):
     """Extract text from all pages of a PDF file."""
     doc = fitz.open(pdf_path)
     text = ""
     for page_num in range(doc.page_count):
-        page = doc.load_page(page_num)  # Ensure you load each page properly
-        text += page.get_text("text") + "\n"  # Append text from each page
+        page = doc.load_page(page_num) 
+        text += page.get_text("text") + "\n" 
     return text.strip()
 def pdf_to_json(pdf_path, output_path):
     """Extract text from PDF and use OpenAI API to convert it into structured JSON."""
@@ -28,10 +28,6 @@ Extract the data from this invoice and convert it into structured JSON format. E
     - All items in the invoice are captured, including duplicates.
     - The JSON output includes exactly 31 items if present.
     - The table rows are well-structured with key-value pairs.
-
-    Convert the following text into a properly formatted JSON structure. Ensure the JSON is valid, complete, and properly formatted.
-    The JSON should include the following fields:
-    
     Ensure that:
      -Ensure that both upper and lower case digits are captured accurately.
 - Extract all rows from tables, including similar and duplicate data.
@@ -49,16 +45,6 @@ Extract the data from this invoice and convert it into structured JSON format. E
           MRP_amount, discount, quantity, rate, taxable_amount, net_taxable_amount, B.D /C %, A.D /C %, Aft D /C MRP,Campaign,
 Discount ,IGST% ,IGST,UOM,Order ,GST %, GST Amt,Total_GST:total gst amount
 Qty,Customer Price,GSTRate,Amount,Disc % ,Disc Amt ,Cess % ,Cess Amt
-
-    
-    invoice:
-        - invoice_number: The unique identifier for the invoice.
-        - invoice_date: The date the invoice was issued.
-        - invoice_time: The time the invoice was issued (if available).
-        - sale_type: The type of sale (e.g., Retail, Wholesale, etc.).
-        - customer_code: A unique code for the customer (if available).
-        - customer_name: The name of the customer.
-        - customer_address: The address of the customer.
         - place_of_supply: The location where goods/services are supplied.
         - gst_number: The GST identification number of the customer or supplier.
         - remarks: Any remarks or notes related to the invoice.
@@ -69,29 +55,7 @@ Qty,Customer Price,GSTRate,Amount,Disc % ,Disc Amt ,Cess % ,Cess Amt
         - address: The address of the supplier.
         - contact_number: The contact number of the supplier.
         - gst_registration_number: The GST registration number of the supplier.
-    - items:
-        -s.no:s.no in number 4 digit
-        - part_number: both upper and lower case digits are captured accurately both are in one number(if available).The unique part number of the product
-         -per: in per
-         -GST %:gst % in number 
-         -Total_GST:total gst amount
-         -GST Amt: gst amt in number 
-        - description: A brief description of the item. Ensure SKU numbers longer than six digits are separated from item descriptions while maintaining a structured JSON format.
-        - hsn_sac_code: The HSN or SAC code for the product/service.
-        - cgst_rate: The CGST (Central GST) rate for the item.
-        - cgst_amount: The CGST (Central GST) amount for the item.
-        -cgst_%:in %
-        - Sgst _%:in %
-        - sgst_rate: The SGST (State GST) rate for the item.
-        - sgst_amount: The SGST (State GST) amount for the item.
-        - MRP_amount: The MRP amount.
-        -GST_Rate:Gst rate amount in number 
-        -B.D /C  % A.D /C  %: number 
-        - Aft D /CM R P: The amount
-        - HSN_number:Hsn nuber
-        -net taxable amount: net taxable 
-        - 
-        - quantity: The quantity of the item.
+    - items: quantity: The quantity of the item.
         - rate: The rate/price per item.
         - taxable_amount: The taxable amount for the item.
         - discount: The discount percentage (if applicable). Ensure that if two discount values appear (one under the other), both are captured.
@@ -106,10 +70,7 @@ Qty,Customer Price,GSTRate,Amount,Disc % ,Disc Amt ,Cess % ,Cess Amt
         -totaltax_amount:total
     - other_details:
         - payment_terms: Payment terms or due date for payment.
-        - mode_of_payment: The method of payment used (e.g., Cash, Credit, etc.).
-        - shipping_address: The address where the goods are shipped (if different from the customer’s address).
-        - billing_address: The billing address (if different from the customer’s address).
-        - transport_details: Details of the transport used (if applicable).
+        - mode_of_payment: The method of payment used (e.g., Cash, Credit, etc.)
         
         - order_number: The order number associated with the invoice (if available).
         - delivery_date: The expected or actual delivery date of the goods or services.
